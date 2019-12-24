@@ -13,9 +13,9 @@ public class priceHandler {
   static final int PRICE_SIZE = 100;
   static Price[] prices = new Price[PRICE_SIZE];
   static int priceCount = 0;
-  static Scanner keyboard;
+  public static Scanner keyboard;
   
-  static void addPrice() {
+  public static void addPrice() {
     Price price = new Price();
 
     System.out.print("상품가격? ");
@@ -31,7 +31,7 @@ public class priceHandler {
     System.out.println("저장하였습니다.");
   }      
 
-  static void listPrice() {
+ public static void listPrice() {
     for (int i = 0; i < priceCount; i++) {
       Price p = prices[i];
       System.out.printf("%s, %s, %s\n",

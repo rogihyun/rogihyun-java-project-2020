@@ -16,9 +16,10 @@ public class InfoHandler {
   static final int INFO_SIZE = 100;
   static  Info[] infos = new Info[INFO_SIZE];
   static int infoCount = 0;
-  static Scanner keyboard;
   
-  static void addInfo() {
+  public static Scanner keyboard;
+  
+  public static void addInfo() {
     Info info = new Info();
 
     System.out.print("상품번호? ");
@@ -44,7 +45,7 @@ public class InfoHandler {
   }
 
 
-  static void listInfo() {
+ public static void listInfo() {
     for(int i= 0; i < infoCount; i++) {
       Info in = infos[i];
       System.out.printf("%s, %s, %s, %s, %s\n",

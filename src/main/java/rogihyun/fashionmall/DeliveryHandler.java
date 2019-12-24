@@ -12,9 +12,10 @@ public class DeliveryHandler {
   static final int DELIVERY_SIZE = 100;
   static Delivery[] deliveries = new Delivery[DELIVERY_SIZE];
   static int deliveryCount = 0;
-  static Scanner keyboard;
   
-  static void addDelivery() {
+ public static Scanner keyboard;
+  
+ public static void addDelivery() {
     Delivery delivery = new Delivery();
 
     System.out.print("배송방법? ");
@@ -27,7 +28,7 @@ public class DeliveryHandler {
     System.out.println("저장하였습니다.");
   }
 
-  static void listDelivery() {
+ public static void listDelivery() {
     for (int i = 0; i < deliveryCount; i++) {
       Delivery d = deliveries[i];
       System.out.printf("%s, %s \n",

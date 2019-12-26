@@ -1,17 +1,9 @@
-package rogihyun.fashionmall;
-
+package rogihyun.fashionmall.Handler;
 import java.util.Scanner;
+import rogihyun.fashionmall.domain.Info;
+import rogihyun.fashionmall.domain.Price;
 
 public class InfoHandler {
-  
-  static class Info {
-    int no; 
-    String gender; 
-    String qscore; 
-    String sell; ; 
-    String like; ; 
-    String review; 
-  }
 
   static final int INFO_SIZE = 100;
   static  Info[] infos = new Info[INFO_SIZE];
@@ -24,7 +16,8 @@ public class InfoHandler {
 
     System.out.print("상품번호? ");
     info.no = keyboard.nextInt();
-
+    keyboard.nextLine();
+    
     System.out.print("성별? ");
     info.gender = keyboard.nextLine();
 
@@ -52,4 +45,26 @@ public class InfoHandler {
           in.gender, in.qscore, in.sell, in.like, in.review);
     }
   }
+ public static void detailInfo() {
+   System.out.print("번호는? ");
+   int no = keyboard.nextInt();
+   keyboard.nextLine() ;
+   
+   Info info = null;
+   for (int i = 0; i < infoCount; i++) {
+     if (infos[i].no == no) {
+       info = infos[i];
+       break;
+     }
+   }
+   
+   if (info == null) {
+     System.out.println("가격이 유효하지 않습니다.");
+     return;
+   }
+   
+   System.out.printf("상품번호: %s\n", info.no);
+   System.out.printf("성별: %s\n", info.gender);
+   System.out.printf("인기도: %s\n", info.qscore);
+}
 }

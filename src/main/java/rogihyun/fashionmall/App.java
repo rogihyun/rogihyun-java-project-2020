@@ -1,7 +1,10 @@
 package rogihyun.fashionmall;
 
 import java.util.Scanner;
-
+import rogihyun.fashionmall.Handler.DeliveryHandler;
+import rogihyun.fashionmall.Handler.InfoHandler;
+import rogihyun.fashionmall.Handler.priceHandler;
+import rogihyun.fashionmall.Handler.priceHandler2;
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
@@ -11,7 +14,8 @@ public class App {
     InfoHandler.keyboard = keyboard;
     DeliveryHandler.keyboard = keyboard;
     priceHandler.keyboard = keyboard;
-
+    priceHandler2.keyboard = keyboard;
+    
     String command;
 
     do {
@@ -27,18 +31,22 @@ public class App {
           InfoHandler.listInfo();
           break;
 
+        case "/info/detail":
+          InfoHandler.detailInfo();
+          break;
+          
+          
         case "/delivery/add":
           DeliveryHandler.addDelivery();
           break;
 
         case "/delivery/list":
-          DeliveryHandler.addDelivery();
+          DeliveryHandler.listDelivery();
           break;
 
         case "/price/add":
           priceHandler.addPrice();
           break;
-
         case "/price/list":
           priceHandler.listPrice();
           break;
@@ -51,7 +59,7 @@ public class App {
 
     } while (!command.equalsIgnoreCase("quit"));
 
-    System.out.println("안녕!");
+    System.out.println("감사합니다.!");
 
     keyboard.close();
   }

@@ -5,13 +5,13 @@ import rogihyun.fashionmall.domain.Price;
 
 public class InfoHandler {
 
-  static final int INFO_SIZE = 100;
-  static  Info[] infos = new Info[INFO_SIZE];
-  static int infoCount = 0;
+    Info[] infos = new Info[INFO_SIZE];
+   int infoCount = 0;
   
+  static final int INFO_SIZE = 100;
   public static Scanner keyboard;
   
-  public static void addInfo() {
+  public void addInfo() {
     Info info = new Info();
 
     System.out.print("상품번호? ");
@@ -33,27 +33,27 @@ public class InfoHandler {
     System.out.print("리뷰? ");
     info.review = keyboard.nextLine();
 
-    infos[infoCount++] = info;
+    this.infos[this.infoCount++] = info;
     System.out.println("저장하였습니다.");
   }
 
 
- public static void listInfo() {
-    for(int i= 0; i < infoCount; i++) {
-      Info in = infos[i];
+ public void listInfo() {
+    for(int i= 0; i < this.infoCount; i++) {
+      Info in = this.infos[i];
       System.out.printf("%s, %s, %s, %s, %s\n",
           in.gender, in.qscore, in.sell, in.like, in.review);
     }
   }
- public static void detailInfo() {
+ public void detailInfo() {
    System.out.print("번호는? ");
    int no = keyboard.nextInt();
    keyboard.nextLine() ;
    
    Info info = null;
-   for (int i = 0; i < infoCount; i++) {
-     if (infos[i].no == no) {
-       info = infos[i];
+   for (int i = 0; i < this.infoCount; i++) {
+     if (this.infos[i].no == no) {
+       info = this.infos[i];
        break;
      }
    }

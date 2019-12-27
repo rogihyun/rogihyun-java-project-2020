@@ -3,18 +3,26 @@ package rogihyun.fashionmall;
 import java.util.Scanner;
 import rogihyun.fashionmall.Handler.DeliveryHandler;
 import rogihyun.fashionmall.Handler.InfoHandler;
-import rogihyun.fashionmall.Handler.priceHandler;
-import rogihyun.fashionmall.Handler.priceHandler2;
+import rogihyun.fashionmall.Handler.PriceHandler;
+import rogihyun.fashionmall.Handler.PriceHandler2;
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
 
   public static void main(String[] args) {
-
+    
     InfoHandler.keyboard = keyboard;
     DeliveryHandler.keyboard = keyboard;
-    priceHandler.keyboard = keyboard;
-    priceHandler2.keyboard = keyboard;
+    PriceHandler.keyboard = keyboard;
+    PriceHandler2.keyboard = keyboard;
+    
+    InfoHandler 상품정보 = new InfoHandler();
+    
+    DeliveryHandler 배송정보 = new DeliveryHandler();
+    
+    PriceHandler 가격정보1 = new PriceHandler();
+    
+    PriceHandler2 가격정보2 = new PriceHandler2();
     
     String command;
 
@@ -24,33 +32,40 @@ public class App {
 
       switch (command) {
         case "/info/add":
-          InfoHandler.addInfo();
+          상품정보.addInfo();
           break;
 
         case "/info/list":
-          InfoHandler.listInfo();
+          상품정보.listInfo();
           break;
 
         case "/info/detail":
-          InfoHandler.detailInfo();
+          상품정보.detailInfo();
           break;
           
           
         case "/delivery/add":
-          DeliveryHandler.addDelivery();
+          배송정보.addDelivery();
           break;
 
         case "/delivery/list":
-          DeliveryHandler.listDelivery();
+          배송정보.listDelivery();
           break;
 
         case "/price/add":
-          priceHandler.addPrice();
+          가격정보1.addPrice();
           break;
         case "/price/list":
-          priceHandler.listPrice();
+          가격정보1.listPrice();
           break;
 
+        case "/price2/add":
+          가격정보2.addPrice();
+          break;
+        case "/price2/list":
+          가격정보2.listPrice();
+          break;
+          
         default:
           if (!command.equalsIgnoreCase("quit")) {
             System.out.println("실행할 수 없는 명령입니다.");

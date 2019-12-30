@@ -11,18 +11,13 @@ public class App {
 
   public static void main(String[] args) {
     
-    InfoHandler.keyboard = keyboard;
-    DeliveryHandler.keyboard = keyboard;
-    PriceHandler.keyboard = keyboard;
-    PriceHandler2.keyboard = keyboard;
+    InfoHandler 상품정보 = new InfoHandler(keyboard);
     
-    InfoHandler 상품정보 = new InfoHandler();
+    DeliveryHandler 배송정보 = new DeliveryHandler(keyboard);
     
-    DeliveryHandler 배송정보 = new DeliveryHandler();
+    PriceHandler 가격정보1 = new PriceHandler(keyboard);
     
-    PriceHandler 가격정보1 = new PriceHandler();
-    
-    PriceHandler2 가격정보2 = new PriceHandler2();
+    PriceHandler2 가격정보2 = new PriceHandler2(keyboard);
     
     String command;
 

@@ -8,30 +8,44 @@ public class InfoHandler {
     Info[] infos = new Info[INFO_SIZE];
    int infoCount = 0;
   
+   Scanner input;
+   
   static final int INFO_SIZE = 100;
-  public static Scanner keyboard;
+  
+  public InfoHandler(Scanner input) {
+    this.input = input;
+    this.infos = new Info[INFO_SIZE];
+  }
+  
+  public InfoHandler(Scanner input, int capacity) {
+    this.input = input;
+    if (capacity < INFO_SIZE || capacity > 10000)
+      this.infos = new Info[INFO_SIZE];
+    else 
+      this.infos = new Info[capacity];
+  }
   
   public void addInfo() {
     Info info = new Info();
 
     System.out.print("상품번호? ");
-    info.no = keyboard.nextInt();
-    keyboard.nextLine();
+    info.no = input.nextInt();
+    input.nextLine();
     
     System.out.print("성별? ");
-    info.gender = keyboard.nextLine();
+    info.gender = input.nextLine();
 
     System.out.print("인기도? ");
-    info.qscore = keyboard.nextLine();
+    info.qscore = input.nextLine();
 
     System.out.print("판매도? ");
-    info.sell = keyboard.nextLine();
+    info.sell = input.nextLine();
 
     System.out.print("좋아요? ");
-    info.like = keyboard.nextLine();
+    info.like = input.nextLine();
 
     System.out.print("리뷰? ");
-    info.review = keyboard.nextLine();
+    info.review = input.nextLine();
 
     this.infos[this.infoCount++] = info;
     System.out.println("저장하였습니다.");
@@ -47,8 +61,8 @@ public class InfoHandler {
   }
  public void detailInfo() {
    System.out.print("번호는? ");
-   int no = keyboard.nextInt();
-   keyboard.nextLine() ;
+   int no = input.nextInt();
+   input.nextLine() ;
    
    Info info = null;
    for (int i = 0; i < this.infoCount; i++) {

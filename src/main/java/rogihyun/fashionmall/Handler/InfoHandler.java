@@ -1,28 +1,30 @@
 package rogihyun.fashionmall.Handler;
+
 import java.util.Scanner;
 import rogihyun.fashionmall.domain.Info;
-import rogihyun.fashionmall.domain.Price;
 
 public class InfoHandler {
 
-  Info[] infos = new Info[INFO_SIZE];
-  int infoCount = 0;
+  InfoList infoList;
 
   Scanner input;
 
-  static final int INFO_SIZE = 100;
-
   public InfoHandler(Scanner input) {
     this.input = input;
-    this.infos = new Info[INFO_SIZE];
+    this.infoList = new InfoList();
   }
 
   public InfoHandler(Scanner input, int capacity) {
     this.input = input;
-    if (capacity < INFO_SIZE || capacity > 10000)
-      this.infos = new Info[INFO_SIZE];
-    else 
-      this.infos = new Info[capacity];
+    this.infoList = new InfoList(capacity);
+  }
+
+  public void listInfo() {
+    Info[] infos = infoList.toArray();
+    for(Info i : infos) {
+      System.out.printf("%s, %s, %s, %s, %s\n",
+          i.getGender(), i.getQscore(), i.getSell(), i.getLike(), i.getReview());
+    }
   }
 
   public void addInfo() {
@@ -47,30 +49,18 @@ public class InfoHandler {
     System.out.print("리뷰? ");
     info.setReview(input.nextLine());
 
-    this.infos[this.infoCount++] = info;
+    infoList.add(info);
+
     System.out.println("저장하였습니다.");
   }
 
 
-  public void listInfo() {
-    for(int i= 0; i < this.infoCount; i++) {
-      Info in = this.infos[i];
-      System.out.printf("%s, %s, %s, %s, %s\n",
-          in.getGender(), in.getQscore(), in.getSell(), in.getLike(), in.getReview());
-    }
-  }
   public void detailInfo() {
     System.out.print("번호는? ");
     int no = input.nextInt();
     input.nextLine() ;
-
-    Info info = null;
-    for (int i = 0; i < this.infoCount; i++) {
-      if (this.infos[i].getNo() == no) {
-        info = this.infos[i];
-        break;
-      }
-    }
+    
+    Info info = this.infoList.get(no);
 
     if (info == null) {
       System.out.println("가격이 유효하지 않습니다.");

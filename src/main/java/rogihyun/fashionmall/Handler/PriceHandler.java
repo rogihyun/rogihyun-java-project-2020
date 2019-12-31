@@ -30,18 +30,18 @@ public class PriceHandler {
     Price price = new Price();
 
     System.out.print("번호? ");
-    price.no = input.nextInt();
+    price.setNo(input.nextInt());
 
     input.nextLine(); 
     
     System.out.print("상품가격? ");
-    price.pricetag = input.nextLine();
+    price.setPricetag(input.nextLine());
     
     System.out.print("세일가격? ");
-    price.reduced = input.nextLine();
+    price.setReduced(input.nextLine());
 
     System.out.print("회원가격? ");
-    price.membership = input.nextLine();
+    price.setMembership(input.nextLine());
 
     this.prices[this.priceCount++] = price;
     System.out.println("저장하였습니다.");
@@ -51,7 +51,7 @@ public class PriceHandler {
     for (int i = 0; i < this.priceCount; i++) {
       Price p = this.prices[i];
       System.out.printf("%s, %s, %s\n", 
-          p.pricetag, p.reduced, p.membership);
+          p.getPricetag(), p.getReduced(), p.getMembership());
     }
   }
 

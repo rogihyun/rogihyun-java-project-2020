@@ -30,10 +30,10 @@ public class DeliveryHandler {
     Delivery delivery = new Delivery();
     
     System.out.print("배송방법? ");
-    delivery.deliveryMethod = input.nextLine();
+    delivery.setDeliveryMethod(input.nextLine());
 
     System.out.print("평균배송일");
-    delivery.averageDeliveryDate = input.nextLine();
+    delivery.setAverageDeliveryDate(input.nextLine());
 
     this.deliveries[this.deliveryCount++] = delivery;
     System.out.println("저장하였습니다.");
@@ -43,7 +43,7 @@ public class DeliveryHandler {
     for (int i = 0; i < this.deliveryCount; i++) {
       Delivery d = this.deliveries[i];
       System.out.printf("%s, %s \n",
-          d.deliveryMethod, d.averageDeliveryDate);
+          d.getDeliveryMethod(), d.getAverageDeliveryDate());
     }
   }
 

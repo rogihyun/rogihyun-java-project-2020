@@ -1,27 +1,29 @@
 package rogihyun.fashionmall.Handler;
 
+import java.sql.Date;
 import java.util.Scanner;
 import rogihyun.fashionmall.domain.Info;
 
 public class InfoHandler {
 
-  InfoList infoList;
+  ArrayList infoList;
 
   Scanner input;
 
   public InfoHandler(Scanner input) {
     this.input = input;
-    this.infoList = new InfoList();
+    this.infoList = new ArrayList();
   }
 
   public InfoHandler(Scanner input, int capacity) {
     this.input = input;
-    this.infoList = new InfoList(capacity);
+    this.infoList = new ArrayList(capacity);
   }
 
   public void listInfo() {
-    Info[] infos = infoList.toArray();
-    for(Info i : infos) {
+    Object[] arr = this.infoList.toArray();
+    for(Object obj : arr) {
+      Info i = (Info) obj;
       System.out.printf("%s, %s, %s, %s, %s\n",
           i.getGender(), i.getQscore(), i.getSell(), i.getLike(), i.getReview());
     }
@@ -49,7 +51,8 @@ public class InfoHandler {
     System.out.print("리뷰? ");
     info.setReview(input.nextLine());
 
-    infoList.add(info);
+    
+    this.infoList.add(info);
 
     System.out.println("저장하였습니다.");
   }
@@ -57,10 +60,10 @@ public class InfoHandler {
 
   public void detailInfo() {
     System.out.print("번호는? ");
-    int no = input.nextInt();
+    int index = input.nextInt();
     input.nextLine() ;
     
-    Info info = this.infoList.get(no);
+    Info info = (Info)this.infoList.get(index);
 
     if (info == null) {
       System.out.println("가격이 유효하지 않습니다.");

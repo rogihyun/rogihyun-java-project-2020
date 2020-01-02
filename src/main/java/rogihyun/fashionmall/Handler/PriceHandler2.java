@@ -6,23 +6,24 @@ import rogihyun.fashionmall.domain.Price;
 
 public class PriceHandler2 {
   
-  PriceList priceList;
+  ArrayList priceList;
   
    Scanner input;
   
   public PriceHandler2(Scanner input) {
     this.input = input;
-    priceList = new PriceList();
+    this.priceList = new ArrayList();
   }
   
   public PriceHandler2(Scanner input, int capacity) {
     this.input = input;
-    priceList = new PriceList(capacity);
+    this.priceList = new ArrayList(capacity);
   }
   
   public  void listPrice() {
-    Price[] prices = priceList.toArray();
-    for (Price p: prices) {
+    Object[] arr = this.priceList.toArray();
+    for (Object obj : arr) {
+      Price p =(Price) obj;
       System.out.printf("%s, %s, %s\n", 
           p.getPricetag(), p.getReduced(), p.getMembership());
     }
@@ -45,7 +46,7 @@ public class PriceHandler2 {
     System.out.print("회원가격? ");
     price.setMembership(input.nextLine());
 
-    priceList.add(price);
+    this.priceList.add(price);
     
     System.out.println("저장하였습니다.");
   }      

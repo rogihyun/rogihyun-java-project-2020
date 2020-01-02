@@ -5,23 +5,24 @@ import rogihyun.fashionmall.domain.Delivery;
 
 public class DeliveryHandler {
 
-  DeliveryList deliveryList;
+  ArrayList deliveryList;
 
   Scanner input;
 
   public DeliveryHandler(Scanner input) {
     this.input = input;
-    this.deliveryList = new DeliveryList();
+    this.deliveryList = new ArrayList();
   }
 
   public DeliveryHandler(Scanner input, int capacity) {
     this.input = input;
-    this.deliveryList = new DeliveryList(capacity);
+    this.deliveryList = new ArrayList(capacity);
   }
 
-  public  void listDelivery() {
-    Delivery[] deliverys = this.deliveryList.toArray();
-    for (Delivery d: deliverys) {
+  public void listDelivery() {
+    Object[] arr = this.deliveryList.toArray();
+    for (Object obj : arr) {
+      Delivery d = (Delivery) obj;
       System.out.printf("%s, %s \n",
           d.getDeliveryMethod(), d.getAverageDeliveryDate());
     }

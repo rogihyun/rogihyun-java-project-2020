@@ -4,7 +4,6 @@ import java.util.Scanner;
 import rogihyun.fashionmall.Handler.DeliveryHandler;
 import rogihyun.fashionmall.Handler.InfoHandler;
 import rogihyun.fashionmall.Handler.PriceHandler;
-import rogihyun.fashionmall.Handler.PriceHandler2;
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
@@ -17,7 +16,6 @@ public class App {
     
     PriceHandler 가격정보1 = new PriceHandler(keyboard);
     
-    PriceHandler2 가격정보2 = new PriceHandler2(keyboard);
     
     String command;
 
@@ -52,13 +50,6 @@ public class App {
           break;
         case "/price/list":
           가격정보1.listPrice();
-          break;
-
-        case "/price2/add":
-          가격정보2.addPrice();
-          break;
-        case "/price2/list":
-          가격정보2.listPrice();
           break;
           
         default:

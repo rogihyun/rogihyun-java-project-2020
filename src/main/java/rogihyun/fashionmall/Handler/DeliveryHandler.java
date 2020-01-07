@@ -2,27 +2,28 @@ package rogihyun.fashionmall.Handler;
 
 import java.util.Scanner;
 import rogihyun.fashionmall.domain.Delivery;
+import rogihyun.util.ArrayList;
 
 public class DeliveryHandler {
 
-  ArrayList deliveryList;
+  ArrayList<Delivery> deliveryList;
 
-  Scanner input;
+  public Scanner input;
 
   public DeliveryHandler(Scanner input) {
     this.input = input;
-    this.deliveryList = new ArrayList();
+    this.deliveryList = new ArrayList<>();
   }
 
   public DeliveryHandler(Scanner input, int capacity) {
     this.input = input;
-    this.deliveryList = new ArrayList(capacity);
+    this.deliveryList = new ArrayList<>(capacity);
   }
 
   public void listDelivery() {
-    Object[] arr = this.deliveryList.toArray();
-    for (Object obj : arr) {
-      Delivery d = (Delivery) obj;
+    
+    Delivery[] arr = this.deliveryList.toArray(new Delivery[] {});
+    for (Delivery d : arr) {
       System.out.printf("%s, %s \n",
           d.getDeliveryMethod(), d.getAverageDeliveryDate());
     }

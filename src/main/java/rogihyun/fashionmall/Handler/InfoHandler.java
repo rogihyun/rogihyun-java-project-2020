@@ -3,27 +3,31 @@ package rogihyun.fashionmall.Handler;
 import java.sql.Date;
 import java.util.Scanner;
 import rogihyun.fashionmall.domain.Info;
+import rogihyun.util.ArrayList;
 
 public class InfoHandler {
 
-  ArrayList infoList;
+  ArrayList<Info> infoList;
 
   Scanner input;
 
   public InfoHandler(Scanner input) {
     this.input = input;
-    this.infoList = new ArrayList();
+    this.infoList = new ArrayList<>();
   }
 
   public InfoHandler(Scanner input, int capacity) {
     this.input = input;
-    this.infoList = new ArrayList(capacity);
+    this.infoList = new ArrayList<>(capacity);
   }
 
   public void listInfo() {
-    Object[] arr = this.infoList.toArray();
-    for(Object obj : arr) {
-      Info i = (Info) obj;
+    
+    Info[] arr = new Info[this.infoList.size()];
+    
+   this.infoList.toArray(arr);
+    
+    for(Info i : arr) {
       System.out.printf("%s, %s, %s, %s, %s\n",
           i.getGender(), i.getQscore(), i.getSell(), i.getLike(), i.getReview());
     }

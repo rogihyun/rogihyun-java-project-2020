@@ -3,27 +3,27 @@ package rogihyun.fashionmall.Handler;
 import java.util.Scanner;
 import rogihyun.fashionmall.domain.Info;
 import rogihyun.fashionmall.domain.Price;
+import rogihyun.util.ArrayList;
 
 public class PriceHandler {
   
-  ArrayList priceList;
+  ArrayList<Price> priceList;
   
    Scanner input;
   
   public PriceHandler(Scanner input) {
     this.input = input;
-    this.priceList = new ArrayList();
+    this.priceList = new ArrayList<>();
   }
   
   public PriceHandler(Scanner input, int capacity) {
     this.input = input;
-    this.priceList = new ArrayList(capacity);
+    this.priceList = new ArrayList<>(capacity);
   }
   
   public  void listPrice() {
-    Object[] arr = this.priceList.toArray();
-    for (Object obj : arr) {
-      Price p =(Price) obj;
+    Price[] arr = this.priceList.toArray(new Price[] {});
+    for (Price p : arr) {
       System.out.printf("%s, %s, %s\n", 
           p.getPricetag(), p.getReduced(), p.getMembership());
     }

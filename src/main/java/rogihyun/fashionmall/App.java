@@ -10,11 +10,9 @@ public class App {
 
   public static void main(String[] args) {
     
-    InfoHandler 상품정보 = new InfoHandler(keyboard);
-    
-    DeliveryHandler 배송정보 = new DeliveryHandler(keyboard);
-    
-    PriceHandler 가격정보1 = new PriceHandler(keyboard);
+    InfoHandler InfoHandler = new InfoHandler(keyboard);
+    DeliveryHandler DeliveryHandler = new DeliveryHandler(keyboard);
+    PriceHandler PriceHandler = new PriceHandler(keyboard);
     
     
     String command;
@@ -25,31 +23,62 @@ public class App {
 
       switch (command) {
         case "/info/add":
-          상품정보.addInfo();
+          InfoHandler.addInfo();
           break;
 
         case "/info/list":
-          상품정보.listInfo();
+          InfoHandler.listInfo();
           break;
 
         case "/info/detail":
-          상품정보.detailInfo();
+          InfoHandler.detailInfo();
           break;
           
+        case "/info/update":
+          InfoHandler.updateInfo();
+          break;
+          
+        case "/info/delete":
+          InfoHandler.updateInfo();
+          break;
           
         case "/delivery/add":
-          배송정보.addDelivery();
+          DeliveryHandler.addDelivery();
           break;
 
         case "/delivery/list":
-          배송정보.listDelivery();
+          DeliveryHandler.listDelivery();
+          break;
+          
+        case "/delivery/detail":
+          DeliveryHandler.listDelivery();
+          break;
+          
+        case "/delivery/update":
+          DeliveryHandler.listDelivery();
+          break;
+          
+        case "/delivery/delete":
+          DeliveryHandler.listDelivery();
           break;
 
         case "/price/add":
-          가격정보1.addPrice();
+          PriceHandler.addPrice();
           break;
         case "/price/list":
-          가격정보1.listPrice();
+          PriceHandler.listPrice();
+          break;
+          
+        case "/price/detail":
+          PriceHandler.listPrice();
+          break;
+          
+        case "/price/update":
+          PriceHandler.listPrice();
+          break;
+          
+        case "/price/delete":
+          PriceHandler.listPrice();
           break;
           
         default:

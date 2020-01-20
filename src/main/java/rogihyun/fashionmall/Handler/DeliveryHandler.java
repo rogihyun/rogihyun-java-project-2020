@@ -8,7 +8,7 @@ public class DeliveryHandler {
 
   ArrayList<Delivery> deliveryList;
 
-  public Scanner input;
+  Scanner input;
 
   public DeliveryHandler(Scanner input) {
     this.input = input;
@@ -26,6 +26,11 @@ public class DeliveryHandler {
   public  void addDelivery() {
     Delivery delivery = new Delivery();
 
+    System.out.print("번호? ");
+    delivery.setNo(input.nextInt());
+
+    input.nextLine();
+
     System.out.print("배송방법? ");
     delivery.setDeliveryMethod(input.nextLine());
 
@@ -36,57 +41,59 @@ public class DeliveryHandler {
 
     System.out.println("저장하였습니다.");
   }
-  
+
   public void detailDelivery() {
-    System.out.println("상품 리스트");
+    System.out.print("상품 인덱스?");
     int index = input.nextInt();
     input.nextLine();
-    
+
     Delivery delivery = this.deliveryList.get(index);
-    
+
     if(delivery == null) {
       System.out.println("상품이 품절되었습니다.");
       return;
     }
-    System.out.printf("배송방법: %d\n", delivery.getDeliveryMethod());
-    System.out.printf("평균배송일: %d\n", delivery.getAverageDeliveryDate());
+
+    System.out.printf("번호: %d\n", delivery.getNo());
+    System.out.printf("배송방법: %s\n", delivery.getDeliveryMethod());
+    System.out.printf("평균배송일: %s\n", delivery.getAverageDeliveryDate());
   }
-  
+
   public void deleteDelivery() {
-    System.out.print("회원 인덱스? ");
+    System.out.print("배송정보? ");
     int index = input.nextInt();
-    input.nextLine(); 
-    
+    input.nextLine();
+
     Delivery delivery = this.deliveryList.get(index);
-    
+
     if (delivery == null) {
-      System.out.println("회원 인덱스가 유효하지 않습니다.");
+      System.out.println("배송정보가 유효하지 않습니다.");
       return;
     }
-    
+
     this.deliveryList.remove(index);
-    
-    System.out.println("회원을 삭제했습니다.");
+
+    System.out.println("배송을 삭제했습니다.");
   }
   public void updateDelivery() {
-    System.out.print("회원 인덱스? ");
+    System.out.print("번호? ");
     int index = input.nextInt();
     input.nextLine(); // 숫자 뒤의 남은 공백 제거
-    
+
     Delivery oldDelivery = this.deliveryList.get(index);
-    
+
     if (oldDelivery == null) {
       System.out.println("회원 인덱스가 유효하지 않습니다.");
       return;
     }
-    
+
     boolean changed = false;
     String inputStr = null;
     Delivery newDelivery = new Delivery();
-    
+
     newDelivery.setNo(oldDelivery.getNo());
-    
-    System.out.printf("배송방법", oldDelivery.getDeliveryMethod());
+
+    System.out.printf("배송방법(%s)", oldDelivery.getDeliveryMethod());
     inputStr = input.nextLine();
     if (inputStr.length() == 0) {
       newDelivery.setDeliveryMethod(oldDelivery.getDeliveryMethod());
@@ -94,8 +101,8 @@ public class DeliveryHandler {
       newDelivery.setDeliveryMethod(inputStr);
       changed = true;
     }
-    
-    System.out.printf("평균배송일", oldDelivery.getAverageDeliveryDate());
+
+    System.out.printf("평균배송일(%s)", oldDelivery.getAverageDeliveryDate());
     inputStr = input.nextLine();
     if (inputStr.length() == 0) {
       newDelivery.setAverageDeliveryDate(oldDelivery.getAverageDeliveryDate());
@@ -103,13 +110,13 @@ public class DeliveryHandler {
       newDelivery.setAverageDeliveryDate(inputStr);
       changed = true;
     }
-    
+
     if (changed) {
       this.deliveryList.set(index, newDelivery);
       System.out.println("회원을 변경했습니다.");
     } else {
       System.out.println("회원 변경을 취소하였습니다.");
     }
-    
+
   }
 }

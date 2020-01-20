@@ -4,7 +4,6 @@ public class Delivery {
   private int no;
   private String deliveryMethod;
   private String averageDeliveryDate;
-  
   public int getNo() {
     return no;
   }
@@ -22,7 +21,9 @@ public class Delivery {
   }
   public void setAverageDeliveryDate(String averageDeliveryDate) {
     this.averageDeliveryDate = averageDeliveryDate;
-  } 
-  
+  }
+
+
+
 }
 

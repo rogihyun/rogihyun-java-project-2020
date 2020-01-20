@@ -9,12 +9,12 @@ public class App {
   static Scanner keyboard = new Scanner(System.in);
 
   public static void main(String[] args) {
-    
+
     InfoHandler InfoHandler = new InfoHandler(keyboard);
     DeliveryHandler DeliveryHandler = new DeliveryHandler(keyboard);
     PriceHandler PriceHandler = new PriceHandler(keyboard);
-    
-    
+
+
     String command;
 
     do {
@@ -33,15 +33,15 @@ public class App {
         case "/info/detail":
           InfoHandler.detailInfo();
           break;
-          
+
         case "/info/update":
           InfoHandler.updateInfo();
           break;
-          
+
         case "/info/delete":
-          InfoHandler.updateInfo();
+          InfoHandler.deleteInfo();
           break;
-          
+
         case "/delivery/add":
           DeliveryHandler.addDelivery();
           break;
@@ -49,17 +49,17 @@ public class App {
         case "/delivery/list":
           DeliveryHandler.listDelivery();
           break;
-          
+
         case "/delivery/detail":
-          DeliveryHandler.listDelivery();
+          DeliveryHandler.detailDelivery();
           break;
-          
+
         case "/delivery/update":
-          DeliveryHandler.listDelivery();
+          DeliveryHandler.updateDelivery();
           break;
-          
+
         case "/delivery/delete":
-          DeliveryHandler.listDelivery();
+          DeliveryHandler.deleteDelivery();
           break;
 
         case "/price/add":
@@ -68,23 +68,23 @@ public class App {
         case "/price/list":
           PriceHandler.listPrice();
           break;
-          
+
         case "/price/detail":
-          PriceHandler.listPrice();
+          PriceHandler.detailPrice();
           break;
-          
+
         case "/price/update":
-          PriceHandler.listPrice();
+          PriceHandler.updatePrice();
           break;
-          
+
         case "/price/delete":
-          PriceHandler.listPrice();
+          PriceHandler.deletePrice();
           break;
-          
+
         default:
           if (!command.equalsIgnoreCase("quit")) {
             System.out.println("실행할 수 없는 명령입니다.");
-          } 
+          }
       }
 
     } while (!command.equalsIgnoreCase("quit"));

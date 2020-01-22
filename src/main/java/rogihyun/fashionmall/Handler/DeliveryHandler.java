@@ -1,22 +1,22 @@
 package rogihyun.fashionmall.Handler;
 
-import java.util.Scanner;
+import java.util.LinkedList;
 import rogihyun.fashionmall.domain.Delivery;
-import rogihyun.util.ArrayList;
+import rogihyun.util.Prompt;
 
 public class DeliveryHandler {
 
-  ArrayList<Delivery> deliveryList;
+  LinkedList<Delivery> deliveryList;
 
-  Scanner input;
+  Prompt prompt;
 
-  public DeliveryHandler(Scanner input) {
-    this.input = input;
-    this.deliveryList = new ArrayList<>();
+  public DeliveryHandler(Prompt prompt) {
+    this.prompt = prompt;
+    this.deliveryList = new LinkedList<>();
   }
 
   public void listDelivery() {
-   Delivery[] arr = this.deliveryList.toArray(new Delivery[] {});
+    Delivery[] arr = this.deliveryList.toArray(new Delivery[] {});
     for (Delivery d : arr) {
       System.out.printf("%s, %s \n",
           d.getDeliveryMethod(), d.getAverageDeliveryDate());
@@ -26,33 +26,24 @@ public class DeliveryHandler {
   public  void addDelivery() {
     Delivery delivery = new Delivery();
 
-    System.out.print("번호? ");
-    delivery.setNo(input.nextInt());
+    delivery.setNo(prompt.inputInt("번호? "));
+    delivery.setDeliveryMethod(prompt.inputString("배송방법?"));
+    delivery.setAverageDeliveryDate(prompt.inputString("평균배송일"));
 
-    input.nextLine();
-
-    System.out.print("배송방법? ");
-    delivery.setDeliveryMethod(input.nextLine());
-
-    System.out.print("평균배송일");
-    delivery.setAverageDeliveryDate(input.nextLine());
-
-   this.deliveryList.add(delivery);
+    this.deliveryList.add(delivery);
 
     System.out.println("저장하였습니다.");
   }
 
   public void detailDelivery() {
-    System.out.print("상품 인덱스?");
-    int index = input.nextInt();
-    input.nextLine();
+    int index = indexOfDelivery(prompt.inputInt("상품번호"));
 
-    Delivery delivery = this.deliveryList.get(index);
-
-    if(delivery == null) {
+    if(index == -1) {
       System.out.println("상품이 품절되었습니다.");
       return;
     }
+
+    Delivery delivery = this.deliveryList.get(index);
 
     System.out.printf("번호: %d\n", delivery.getNo());
     System.out.printf("배송방법: %s\n", delivery.getDeliveryMethod());
@@ -60,13 +51,10 @@ public class DeliveryHandler {
   }
 
   public void deleteDelivery() {
-    System.out.print("배송정보? ");
-    int index = input.nextInt();
-    input.nextLine();
 
-    Delivery delivery = this.deliveryList.get(index);
+    int index = indexOfDelivery(prompt.inputInt("배송정보? "));
 
-    if (delivery == null) {
+    if (index == -1) {
       System.out.println("배송정보가 유효하지 않습니다.");
       return;
     }
@@ -75,48 +63,43 @@ public class DeliveryHandler {
 
     System.out.println("배송을 삭제했습니다.");
   }
+
   public void updateDelivery() {
-    System.out.print("번호? ");
-    int index = input.nextInt();
-    input.nextLine(); // 숫자 뒤의 남은 공백 제거
 
-    Delivery oldDelivery = this.deliveryList.get(index);
+    int index = indexOfDelivery(prompt.inputInt("번호? "));
 
-    if (oldDelivery == null) {
+    if (index == -1) {
       System.out.println("회원 인덱스가 유효하지 않습니다.");
       return;
     }
 
-    boolean changed = false;
-    String inputStr = null;
+    Delivery oldDelivery = this.deliveryList.get(index);
     Delivery newDelivery = new Delivery();
 
-    newDelivery.setNo(oldDelivery.getNo());
+    newDelivery.setDeliveryMethod(prompt.inputString(
+        String.format("배송방법(%s)? ", oldDelivery.getDeliveryMethod()),
+        oldDelivery.getDeliveryMethod()));
 
-    System.out.printf("배송방법(%s)", oldDelivery.getDeliveryMethod());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newDelivery.setDeliveryMethod(oldDelivery.getDeliveryMethod());
-    } else {
-      newDelivery.setDeliveryMethod(inputStr);
-      changed = true;
-    }
+    newDelivery.setAverageDeliveryDate(prompt.inputString(
+        String.format("평균배송일(%s)? ", oldDelivery.getAverageDeliveryDate()),
+        oldDelivery.getAverageDeliveryDate()));
 
-    System.out.printf("평균배송일(%s)", oldDelivery.getAverageDeliveryDate());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newDelivery.setAverageDeliveryDate(oldDelivery.getAverageDeliveryDate());
-    } else {
-      newDelivery.setAverageDeliveryDate(inputStr);
-      changed = true;
-    }
 
-    if (changed) {
-      this.deliveryList.set(index, newDelivery);
+    if (oldDelivery.equals(newDelivery)) {
       System.out.println("회원을 변경했습니다.");
-    } else {
-      System.out.println("회원 변경을 취소하였습니다.");
+      return;
     }
+    this.deliveryList.set(index, newDelivery);
+    System.out.println("회원 변경을 취소하였습니다.");
+  }
 
+
+  private int indexOfDelivery(int no) {
+    for (int i = 0; i < this.deliveryList.size(); i++) {
+      if (this.deliveryList.get(i).getNo() == no) {
+        return i;
+      }
+    }
+    return -1;
   }
 }

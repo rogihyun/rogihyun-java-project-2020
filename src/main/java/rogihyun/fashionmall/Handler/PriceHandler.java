@@ -1,23 +1,18 @@
 package rogihyun.fashionmall.Handler;
 
-import java.util.Scanner;
+import java.util.LinkedList;
 import rogihyun.fashionmall.domain.Price;
-import rogihyun.util.ArrayList;
+import rogihyun.util.Prompt;
 
 public class PriceHandler {
 
-  ArrayList<Price> priceList;
+  LinkedList<Price> priceList;
 
-   Scanner input;
+  Prompt prompt;
 
-  public PriceHandler(Scanner input) {
-    this.input = input;
-    this.priceList = new ArrayList<>();
-  }
-
-  public PriceHandler(Scanner input, int capacity) {
-    this.input = input;
-    this.priceList = new ArrayList<>(capacity);
+  public PriceHandler(Prompt prompt) {
+    this.prompt = prompt;
+    this.priceList = new LinkedList<>();
   }
 
   public  void listPrice() {
@@ -33,19 +28,10 @@ public class PriceHandler {
   public  void addPrice() {
     Price price = new Price();
 
-    System.out.print("번호? ");
-    price.setNo(input.nextInt());
-
-    input.nextLine();
-
-    System.out.print("상품가격? ");
-    price.setPricetag(input.nextLine());
-
-    System.out.print("세일가격? ");
-    price.setReduced(input.nextLine());
-
-    System.out.print("회원가격? ");
-    price.setMembership(input.nextLine());
+    price.setNo(prompt.inputInt("번호? "));
+    price.setPricetag(prompt.inputString("상품가격? "));
+    price.setReduced(prompt.inputString("세일가격? "));
+    price.setMembership(prompt.inputString("회원가격? "));
 
     this.priceList.add(price);
 
@@ -53,17 +39,14 @@ public class PriceHandler {
   }
 
   public void detailPrice() {
-    System.out.print("게시글 인덱스? ");
-    int index = input.nextInt();
-    input.nextLine(); // 숫자 뒤의 남은 공백 제거
+    int index = indexOfPrice(prompt.inputInt("번호? "));
 
-    Price price = this.priceList.get(index);
-
-    if (price == null) {
+    if (index == -1) {
       System.out.println("게시글 인덱스가 유효하지 않습니다.");
       return;
     }
 
+    Price price = this.priceList.get(index);
     System.out.printf("번호: %d\n", price.getNo());
     System.out.printf("상품가격: %s\n", price.getPricetag());
     System.out.printf("세일가격: %s\n", price.getReduced());
@@ -71,13 +54,9 @@ public class PriceHandler {
   }
 
   public void deletePrice() {
-    System.out.print("게시글 인덱스? ");
-    int index = input.nextInt();
-    input.nextLine(); // 숫자 뒤의 남은 공백 제거
+    int index = indexOfPrice(prompt.inputInt("번호? "));
 
-    Price price = this.priceList.get(index);
-
-    if (price == null) {
+    if (index == -1) {
       System.out.println("게시글 인덱스가 유효하지 않습니다.");
       return;
     }
@@ -88,56 +67,44 @@ public class PriceHandler {
   }
 
   public void updatePrice() {
-    System.out.print("번호? ");
-    int index = input.nextInt();
-    input.nextLine(); // 숫자 뒤의 남은 공백 제거
+    int index = indexOfPrice(prompt.inputInt("번호? "));
 
-    Price oldPrice = this.priceList.get(index);
-
-    if (oldPrice == null) {
+    if (index == -1) {
       System.out.println("게시글 인덱스가 유효하지 않습니다.");
       return;
     }
 
-    boolean changed = false;
-    String inputStr = null;
+    Price oldPrice = this.priceList.get(index);
     Price newPrice = new Price();
 
-    newPrice.setNo(oldPrice.getNo());
+    newPrice.setPricetag(prompt.inputString(
+        String.format("상품가격(%s)? ", oldPrice.getPricetag()),
+        oldPrice.getPricetag()));
 
-    System.out.printf("상품가격? ", oldPrice.getPricetag());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newPrice.setPricetag(oldPrice.getPricetag());
-    } else {
-      newPrice.setPricetag(inputStr);
-      changed = true;
-    }
+    newPrice.setReduced(prompt.inputString(
+        String.format("상품가격(%s)? ", oldPrice.getReduced()),
+        oldPrice.getReduced()));
 
-    System.out.printf("세일가격? ", oldPrice.getReduced());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newPrice.setPricetag(oldPrice.getPricetag());
-    } else {
-      newPrice.setPricetag(inputStr);
-      changed = true;
-    }
+    newPrice.setMembership(prompt.inputString(
+        String.format("상품가격(%s)? ", oldPrice.getMembership()),
+        oldPrice.getMembership()));
 
-    System.out.printf("회원가격? ",oldPrice.getMembership());
-    inputStr = input.nextLine();
-    if (inputStr.length() == 0) {
-      newPrice.setPricetag(oldPrice.getPricetag());
-    } else {
-      newPrice.setPricetag(inputStr);
-      changed = true;
-    }
-
-    if (changed) {
-      this.priceList.set(index, newPrice);
-      System.out.println("회원을 변경했습니다.");
-    } else {
-      System.out.println("회원 변경을 취소하였습니다.");
-    }
+  if (oldPrice.equals(newPrice)) {
+    System.out.println("게시글 변경을 취소했습니다.");
+    return;
   }
 
+  this.priceList.set(index, newPrice);
+  System.out.println("게시글을 변경했습니다.");
 }
+
+  private int indexOfPrice(int no) {
+    for (int i = 0; i < this.priceList.size(); i++) {
+      if (this.priceList.get(i).getNo() == no) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+ }

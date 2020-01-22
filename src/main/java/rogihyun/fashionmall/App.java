@@ -4,16 +4,18 @@ import java.util.Scanner;
 import rogihyun.fashionmall.Handler.DeliveryHandler;
 import rogihyun.fashionmall.Handler.InfoHandler;
 import rogihyun.fashionmall.Handler.PriceHandler;
+import rogihyun.util.Prompt;
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
 
   public static void main(String[] args) {
 
-    InfoHandler InfoHandler = new InfoHandler(keyboard);
-    DeliveryHandler DeliveryHandler = new DeliveryHandler(keyboard);
-    PriceHandler PriceHandler = new PriceHandler(keyboard);
+    Prompt prompt = new Prompt(keyboard);
 
+    InfoHandler InfoHandler = new InfoHandler(prompt);
+    DeliveryHandler DeliveryHandler = new DeliveryHandler(prompt);
+    PriceHandler PriceHandler = new PriceHandler(prompt);
 
     String command;
 

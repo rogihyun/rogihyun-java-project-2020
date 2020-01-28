@@ -2,7 +2,7 @@ package rogihyun.util;
 
 import java.lang.reflect.Array;
 
-public class infoList<E> {
+public class LinkedList<E> {
 
   Node<E> first;
 

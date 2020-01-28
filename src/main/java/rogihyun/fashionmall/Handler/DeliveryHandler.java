@@ -1,18 +1,18 @@
 package rogihyun.fashionmall.Handler;
 
-import java.util.LinkedList;
 import rogihyun.fashionmall.domain.Delivery;
+import rogihyun.util.List;
 import rogihyun.util.Prompt;
 
 public class DeliveryHandler {
 
-  LinkedList<Delivery> deliveryList;
+  List<Delivery> deliveryList;
 
   Prompt prompt;
 
-  public DeliveryHandler(Prompt prompt) {
+  public DeliveryHandler(Prompt prompt, List<Delivery> list) {
     this.prompt = prompt;
-    this.deliveryList = new LinkedList<>();
+    this.deliveryList = list;
   }
 
   public void listDelivery() {

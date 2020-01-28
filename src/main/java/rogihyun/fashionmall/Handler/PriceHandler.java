@@ -1,18 +1,18 @@
 package rogihyun.fashionmall.Handler;
 
-import java.util.LinkedList;
 import rogihyun.fashionmall.domain.Price;
+import rogihyun.util.List;
 import rogihyun.util.Prompt;
 
 public class PriceHandler {
 
-  LinkedList<Price> priceList;
+  List<Price> priceList;
 
   Prompt prompt;
 
-  public PriceHandler(Prompt prompt) {
+  public PriceHandler(Prompt prompt, List<Price> list) {
     this.prompt = prompt;
-    this.priceList = new LinkedList<>();
+    this.priceList = list;
   }
 
   public  void listPrice() {

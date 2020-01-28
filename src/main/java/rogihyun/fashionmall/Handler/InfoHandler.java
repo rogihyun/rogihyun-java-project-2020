@@ -1,18 +1,18 @@
 package rogihyun.fashionmall.Handler;
 
-import java.util.LinkedList;
 import rogihyun.fashionmall.domain.Info;
+import rogihyun.util.List;
 import rogihyun.util.Prompt;
 
 public class InfoHandler {
 
-  LinkedList<Info> infoList;
+  List<Info> infoList;
 
   Prompt prompt;
 
-  public InfoHandler(Prompt prompt) {
+  public InfoHandler(Prompt prompt, List<Info> list) {
     this.prompt = prompt;
-    this.infoList = new LinkedList<>();
+    this.infoList = list;
   }
 
   public void listInfo() {

@@ -4,6 +4,11 @@ import java.util.Scanner;
 import rogihyun.fashionmall.Handler.DeliveryHandler;
 import rogihyun.fashionmall.Handler.InfoHandler;
 import rogihyun.fashionmall.Handler.PriceHandler;
+import rogihyun.fashionmall.domain.Delivery;
+import rogihyun.fashionmall.domain.Info;
+import rogihyun.fashionmall.domain.Price;
+import rogihyun.util.ArrayList;
+import rogihyun.util.LinkedList;
 import rogihyun.util.Prompt;
 import rogihyun.util.Queue;
 import rogihyun.util.Stack;
@@ -18,9 +23,14 @@ public class App {
 
     Prompt prompt = new Prompt(keyboard);
 
-    InfoHandler InfoHandler = new InfoHandler(prompt);
-    DeliveryHandler DeliveryHandler = new DeliveryHandler(prompt);
-    PriceHandler PriceHandler = new PriceHandler(prompt);
+    LinkedList<Price> priceList = new LinkedList<>();
+    PriceHandler priceHandler = new PriceHandler(prompt, priceList);
+
+    ArrayList<Info> infoList = new ArrayList<>();
+    InfoHandler infoHandler = new InfoHandler(prompt, infoList);
+
+    ArrayList<Delivery> deliveryList = new ArrayList<>();
+    DeliveryHandler deliveryHandler = new DeliveryHandler(prompt, deliveryList);
 
     String command;
 
@@ -30,65 +40,68 @@ public class App {
 
       switch (command) {
         case "/info/add":
-          InfoHandler.addInfo();
+          infoHandler.addInfo();
           break;
 
         case "/info/list":
-          InfoHandler.listInfo();
+          infoHandler.listInfo();
           break;
 
         case "/info/detail":
-          InfoHandler.detailInfo();
+          infoHandler.detailInfo();
           break;
 
         case "/info/update":
-          InfoHandler.updateInfo();
+          infoHandler.updateInfo();
           break;
 
         case "/info/delete":
-          InfoHandler.deleteInfo();
+          infoHandler.deleteInfo();
           break;
 
         case "/delivery/add":
-          DeliveryHandler.addDelivery();
+          deliveryHandler.addDelivery();
           break;
 
         case "/delivery/list":
-          DeliveryHandler.listDelivery();
+          deliveryHandler.listDelivery();
           break;
 
         case "/delivery/detail":
-          DeliveryHandler.detailDelivery();
+          deliveryHandler.detailDelivery();
           break;
 
         case "/delivery/update":
-          DeliveryHandler.updateDelivery();
+          deliveryHandler.updateDelivery();
           break;
 
         case "/delivery/delete":
-          DeliveryHandler.deleteDelivery();
+          deliveryHandler.deleteDelivery();
           break;
 
         case "/price/add":
-          PriceHandler.addPrice();
+          priceHandler.addPrice();
           break;
         case "/price/list":
-          PriceHandler.listPrice();
+          priceHandler.listPrice();
           break;
 
         case "/price/detail":
-          PriceHandler.detailPrice();
+          priceHandler.detailPrice();
           break;
 
         case "/price/update":
-          PriceHandler.updatePrice();
+          priceHandler.updatePrice();
           break;
 
         case "/price/delete":
-          PriceHandler.deletePrice();
+          priceHandler.deletePrice();
           break;
         case "history":
           printCommandHistory();
+          break;
+        case "history2":
+          printCommandHistory2();
           break;
         default:
           if (!command.equalsIgnoreCase("quit")) {
@@ -102,6 +115,24 @@ public class App {
 
     keyboard.close();
   }
+  private static void printCommandHistory2() {
+    Queue<String> historyQueue = commandQueue.clone();
+    int count = 0;
+
+    while (historyQueue.size() > 0) {
+      System.out.println(historyQueue.poll());
+
+      if ((++count % 5) == 0) {
+        System.out.print(":");
+        String str = keyboard.nextLine();
+        if (str.equalsIgnoreCase("q")) {
+          break;
+        }
+      }
+    }
+
+  }
+
   private static void printCommandHistory() {
     Stack<String> historyStack = commandStack.clone();
     int count = 0;
@@ -118,4 +149,5 @@ public class App {
       }
     }
   }
+
 }

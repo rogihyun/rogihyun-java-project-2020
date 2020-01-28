@@ -5,12 +5,14 @@ import rogihyun.fashionmall.Handler.DeliveryHandler;
 import rogihyun.fashionmall.Handler.InfoHandler;
 import rogihyun.fashionmall.Handler.PriceHandler;
 import rogihyun.util.Prompt;
+import rogihyun.util.Queue;
 import rogihyun.util.Stack;
 
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
   static Stack<String> commandStack = new Stack<>();
+  static Queue<String> commandQueue = new Queue<>();
 
   public static void main(String[] args) {
 

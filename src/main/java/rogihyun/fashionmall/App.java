@@ -5,9 +5,12 @@ import rogihyun.fashionmall.Handler.DeliveryHandler;
 import rogihyun.fashionmall.Handler.InfoHandler;
 import rogihyun.fashionmall.Handler.PriceHandler;
 import rogihyun.util.Prompt;
+import rogihyun.util.Stack;
+
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
+  static Stack<String> commandStack = new Stack<>();
 
   public static void main(String[] args) {
 
@@ -82,7 +85,9 @@ public class App {
         case "/price/delete":
           PriceHandler.deletePrice();
           break;
-
+        case "history":
+          printCommandHistory();
+          break;
         default:
           if (!command.equalsIgnoreCase("quit")) {
             System.out.println("실행할 수 없는 명령입니다.");
@@ -95,5 +100,20 @@ public class App {
 
     keyboard.close();
   }
+  private static void printCommandHistory() {
+    Stack<String> historyStack = commandStack.clone();
+    int count = 0;
+    while (!historyStack.empty()) {
+      System.out.println(historyStack.pop());
+      count++;
 
+      if ((count % 5) == 0) {
+        System.out.print(":");
+        String str = keyboard.nextLine();
+        if (str.equalsIgnoreCase("q")) {
+          break;
+        }
+      }
+    }
+  }
 }

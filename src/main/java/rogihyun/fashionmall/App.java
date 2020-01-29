@@ -38,6 +38,14 @@ public class App {
       System.out.print("\n명령> ");
       command = keyboard.nextLine();
 
+      if (command.length() == 0)
+        continue;
+
+      commandStack.push(command);
+
+      commandQueue.offer(command);
+
+
       switch (command) {
         case "/info/add":
           infoHandler.addInfo();
@@ -115,6 +123,7 @@ public class App {
 
     keyboard.close();
   }
+
   private static void printCommandHistory2() {
     Queue<String> historyQueue = commandQueue.clone();
     int count = 0;

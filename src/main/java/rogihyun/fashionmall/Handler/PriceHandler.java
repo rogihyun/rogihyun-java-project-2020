@@ -1,16 +1,16 @@
 package rogihyun.fashionmall.Handler;
 
 import rogihyun.fashionmall.domain.Price;
-import rogihyun.util.List;
+import rogihyun.util.AbstractList;
 import rogihyun.util.Prompt;
 
 public class PriceHandler {
 
-  List<Price> priceList;
+  AbstractList<Price> priceList;
 
   Prompt prompt;
 
-  public PriceHandler(Prompt prompt, List<Price> list) {
+  public PriceHandler(Prompt prompt, AbstractList<Price> list) {
     this.prompt = prompt;
     this.priceList = list;
   }

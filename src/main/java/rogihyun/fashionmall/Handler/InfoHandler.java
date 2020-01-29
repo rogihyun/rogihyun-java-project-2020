@@ -1,16 +1,16 @@
 package rogihyun.fashionmall.Handler;
 
 import rogihyun.fashionmall.domain.Info;
-import rogihyun.util.List;
+import rogihyun.util.AbstractList;
 import rogihyun.util.Prompt;
 
 public class InfoHandler {
 
-  List<Info> infoList;
+  AbstractList<Info> infoList;
 
   Prompt prompt;
 
-  public InfoHandler(Prompt prompt, List<Info> list) {
+  public InfoHandler(Prompt prompt, AbstractList<Info> list) {
     this.prompt = prompt;
     this.infoList = list;
   }

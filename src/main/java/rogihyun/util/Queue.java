@@ -1,5 +1,7 @@
 package rogihyun.util;
 
+import java.util.Iterator;
+
 public class Queue<E> extends LinkedList<E> implements Cloneable {
 
   public void offer(E value) {
@@ -51,7 +53,43 @@ public class Queue<E> extends LinkedList<E> implements Cloneable {
     }
     return temp;
   }
+  public Iterator<E> iterator() {
+    // anonymous class : 인스턴스를 한 개만 생성할 경우 로컬 클래스를 익명 클래스로 정의하라.
+    return new Iterator<E>() {
+
+      // 인스턴스 블록 대신 변수 초기화(variable initializer) 문법으로 필드 값을 설정한다.
+      Queue<E> queue = Queue.this.clone();
+
+      @Override
+      public boolean hasNext() {
+        return queue.size() > 0;
+      }
+
+      @Override
+      public E next() {
+        return queue.poll();
+      }
+    };
+  }
+
 }
+
+/*
+## 클래스 멤버:
+
+  class 클래스 {
+    필드 선언(스태틱, 인스턴스)
+    초기화블록(스태틱, 인스턴스)
+    생성자
+    메서드(스태틱, 인스턴스)
+    중첩클래스(스태틱, 인스턴스)
+  }
+
+ */
+
+
+
+
 
 
 

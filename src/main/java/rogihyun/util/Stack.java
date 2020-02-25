@@ -1,6 +1,7 @@
 package rogihyun.util;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class Stack<E> implements Cloneable {
 
@@ -103,6 +104,23 @@ public class Stack<E> implements Cloneable {
       System.out.println(ex);
       return null;
     }
+  }
+  public Iterator<E> iterator() {
+    // anonymous class : 인스턴스를 한 개만 생성한다면 로컬 클래스를 익명 클래스로 정의하라.
+    return new Iterator<E>() {
+
+      Stack<E> stack = Stack.this.clone();
+
+      @Override
+      public boolean hasNext() {
+        return !stack.empty();
+      }
+
+      @Override
+      public E next() {
+        return stack.pop();
+      }
+    };
   }
 }
 

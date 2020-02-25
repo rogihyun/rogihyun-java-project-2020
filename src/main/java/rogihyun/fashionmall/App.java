@@ -1,13 +1,22 @@
 package rogihyun.fashionmall;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
+import com.google.gson.Gson;
 import rogihyun.fashionmall.Handler.Command;
 import rogihyun.fashionmall.Handler.ComputePlusCommand;
 import rogihyun.fashionmall.Handler.DeliveryAddCommand;
@@ -38,7 +47,17 @@ public class App {
   static Deque<String> commandStack = new ArrayDeque<>();
   static Queue<String> commandQueue = new LinkedList<>();
 
+
+  static List<Info> infoList = new ArrayList<>();
+  static List<Delivery> deliveryList = new ArrayList<>();
+  static List<Price> priceList = new ArrayList<>();
+
   public static void main(String[] args) {
+
+    // 파일에서 데이터 로딩
+    loadInfoData();
+    loadDeliveryData();
+    loadPriceData();
 
     Prompt prompt = new Prompt(keyboard);
     HashMap<String, Command> commandMap = new HashMap<>();
@@ -106,14 +125,13 @@ public class App {
     }
 
     keyboard.close();
+
+ // 데이터를 파일에 저장
+    saveInfoData();
+    saveDeliveryData();
+    savePriceData();
   }
 
-  // 이전에는 Stack에서 값을 꺼내는 방법과 Queue에서 값을 꺼내는 방법이 다르기 때문에
-  // printCommandHistory()와 printCommandHistory2() 메서드를 따로 정의했다.
-  // 이제 Stack과 Queue는 일관된 방식으로 값을 꺼내주는 Iterator가 있기 때문에
-  // 두 메서드를 하나로 합칠 수 있다.
-  // 파라미터로 Iterator를 받아서 처리하기만 하면 된다.
-  //
   private static void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
     while (iterator.hasNext()) {
@@ -129,7 +147,79 @@ public class App {
       }
     }
   }
+  private static void loadInfoData() {
+    // 데이터가 보관된 파일을 정보를 준비한다.
+    File file = new File("./info.json");
 
+    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+      infoList.addAll(Arrays.asList(new Gson().fromJson(in, Info[].class)));
+      System.out.printf("총 %d 개의 수업 데이터를 로딩했습니다.\n", infoList.size());
+
+    } catch (IOException e) {
+      System.out.println("파일 읽기 중 오류 발생! - " + e.getMessage());
+    }
+  }
+
+  private static void saveInfoData() {
+    // 데이터가 보관된 파일을 정보를 준비한다.
+    File file = new File("./info.json");
+
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+      out.write(new Gson().toJson(infoList));
+      System.out.printf("총 %d 개의 수업 데이터를 저장했습니다.\n", infoList.size());
+
+    } catch (IOException e) {
+      System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
+    }
+  }
+
+  private static void loadDeliveryData() {
+    File file = new File("./delivery.json");
+
+    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+      deliveryList.addAll(Arrays.asList(new Gson().fromJson(in, Delivery[].class)));
+      System.out.printf("총 %d 개의 회원 데이터를 로딩했습니다.\n", deliveryList.size());
+
+    } catch (IOException e) {
+      System.out.println("파일 읽기 중 오류 발생! - " + e.getMessage());
+    }
+  }
+
+  private static void saveDeliveryData() {
+    File file = new File("./delivery.json");
+
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+      out.write(new Gson().toJson(deliveryList));
+      System.out.printf("총 %d 개의 회원 데이터를 저장했습니다.\n", deliveryList.size());
+
+    } catch (IOException e) {
+      System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
+    }
+  }
+
+  private static void loadPriceData() {
+    File file = new File("./price.json");
+
+    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+      priceList.addAll(Arrays.asList(new Gson().fromJson(in, Price[].class)));
+      System.out.printf("총 %d 개의 게시물 데이터를 로딩했습니다.\n", priceList.size());
+
+    } catch (IOException e) {
+      System.out.println("파일 읽기 중 오류 발생! - " + e.getMessage());
+    }
+  }
+
+  private static void savePriceData() {
+    File file = new File("./price.json");
+
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+      out.write(new Gson().toJson(priceList));
+      System.out.printf("총 %d 개의 게시물 데이터를 저장했습니다.\n", priceList.size());
+
+    } catch (IOException e) {
+      System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
+
+    }
+  }
 }
-
 

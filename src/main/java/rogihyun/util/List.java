@@ -1,5 +1,7 @@
 package rogihyun.util;
 
+import java.util.Iterator;
+
 // 목록 객체의 사용 규칙을 따로 정의
 // => 문법
 //     interface 규칙명 {...}
@@ -32,6 +34,8 @@ public interface List<E> {
   E[] toArray(E[] arr);
 
   int size();
+
+  Iterator<E> iterator();
 
 }
 

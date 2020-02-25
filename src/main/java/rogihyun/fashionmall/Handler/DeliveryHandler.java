@@ -1,12 +1,13 @@
 package rogihyun.fashionmall.Handler;
 
+import java.util.AbstractList;
+import java.util.List;
 import rogihyun.fashionmall.domain.Delivery;
-import rogihyun.util.AbstractList;
 import rogihyun.util.Prompt;
 
 public class DeliveryHandler {
 
-  AbstractList<Delivery> deliveryList;
+  List<Delivery> deliveryList;
 
   Prompt prompt;
 

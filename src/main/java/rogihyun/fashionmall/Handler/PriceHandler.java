@@ -1,12 +1,13 @@
 package rogihyun.fashionmall.Handler;
 
+import java.util.AbstractList;
+import java.util.List;
 import rogihyun.fashionmall.domain.Price;
-import rogihyun.util.AbstractList;
 import rogihyun.util.Prompt;
 
 public class PriceHandler {
 
-  AbstractList<Price> priceList;
+  List<Price> priceList;
 
   Prompt prompt;
 

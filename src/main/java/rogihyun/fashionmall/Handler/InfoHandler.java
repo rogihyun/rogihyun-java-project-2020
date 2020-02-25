@@ -1,12 +1,13 @@
 package rogihyun.fashionmall.Handler;
 
+import java.util.AbstractList;
+import java.util.List;
 import rogihyun.fashionmall.domain.Info;
-import rogihyun.util.AbstractList;
 import rogihyun.util.Prompt;
 
 public class InfoHandler {
 
-  AbstractList<Info> infoList;
+  List<Info> infoList;
 
   Prompt prompt;
 

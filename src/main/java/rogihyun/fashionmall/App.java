@@ -1,5 +1,11 @@
 package rogihyun.fashionmall;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import rogihyun.fashionmall.Handler.DeliveryHandler;
 import rogihyun.fashionmall.Handler.InfoHandler;
@@ -7,17 +13,14 @@ import rogihyun.fashionmall.Handler.PriceHandler;
 import rogihyun.fashionmall.domain.Delivery;
 import rogihyun.fashionmall.domain.Info;
 import rogihyun.fashionmall.domain.Price;
-import rogihyun.util.ArrayList;
-import rogihyun.util.LinkedList;
 import rogihyun.util.Prompt;
-import rogihyun.util.Queue;
-import rogihyun.util.Stack;
 
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
-  static Stack<String> commandStack = new Stack<>();
-  static Queue<String> commandQueue = new Queue<>();
+
+  static Deque<String> commandStack = new ArrayDeque<>();
+  static Queue<String> commandQueue = new LinkedList<>();
 
   public static void main(String[] args) {
 
@@ -106,10 +109,10 @@ public class App {
           priceHandler.deletePrice();
           break;
         case "history":
-          printCommandHistory();
+          printCommandHistory(commandStack.iterator());
           break;
         case "history2":
-          printCommandHistory2();
+          printCommandHistory(commandQueue.iterator());
           break;
         default:
           if (!command.equalsIgnoreCase("quit")) {
@@ -124,29 +127,10 @@ public class App {
     keyboard.close();
   }
 
-  private static void printCommandHistory2() {
-    Queue<String> historyQueue = commandQueue.clone();
+  private static void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
-
-    while (historyQueue.size() > 0) {
-      System.out.println(historyQueue.poll());
-
-      if ((++count % 5) == 0) {
-        System.out.print(":");
-        String str = keyboard.nextLine();
-        if (str.equalsIgnoreCase("q")) {
-          break;
-        }
-      }
-    }
-
-  }
-
-  private static void printCommandHistory() {
-    Stack<String> historyStack = commandStack.clone();
-    int count = 0;
-    while (!historyStack.empty()) {
-      System.out.println(historyStack.pop());
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
       count++;
 
       if ((count % 5) == 0) {
@@ -160,3 +144,5 @@ public class App {
   }
 
 }
+
+
